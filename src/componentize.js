@@ -44,7 +44,6 @@ export async function componentize(jsSource, witWorld, opts) {
     witPath,
     worldName,
     disableFeatures = [],
-    enableFeatures = [],
   } = opts || {};
 
   let { wasm, jsBindings, importWrappers, exports, imports } = spliceBindings(
@@ -79,11 +78,12 @@ export async function componentize(jsSource, witWorld, opts) {
       'Cannot disable "clocks" as it is already an import in the target world.'
     );
   }
-  if (
-    enableFeatures.includes('http') ||
-    imports.some(([module]) => module.startsWith('wasi:http/'))
-  ) {
+  if (!disableFeatures.includes('http')) {
     features.push('http');
+  } else if (imports.some(([module]) => module.startsWith('wasi:http/'))) {
+    throw new Error(
+      'Cannot disable "http" as it is already an import in the target world.'
+    );
   }
 
   if (DEBUG_BINDINGS) {

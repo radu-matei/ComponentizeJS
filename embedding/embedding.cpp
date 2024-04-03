@@ -19,8 +19,13 @@ public:
 };
 
 void builtin_impl_console_log(Console::LogType log_ty, const char *msg) {
-  fprintf(stdout, "%s\n", msg);
-  fflush(stdout);
+  if (log_ty == Console::LogType::Log) {
+    fprintf(stdout, "%s\n", msg);
+    fflush(stdout);
+  } else {
+    fprintf(stderr, "%s\n", msg);
+    fflush(stderr);
+  }
 }
 
 } // builtins::web::console
@@ -419,7 +424,7 @@ namespace componentize::embedding
   void cabi_free(void *ptr)
   {
     LOG("(cabi_free) %d", (uint32_t)ptr);
-    JS_free(Runtime.cx, ptr);
+    // JS_free(Runtime.cx, ptr);
   }
 
   const char *core_ty_str(CoreVal ty)

@@ -11,7 +11,7 @@ export const source = `
   }
 `;
 
-export const disableFeatures = ['stdio', 'random', 'clocks'];
+export const disableFeatures = ['stdio', 'random', 'clocks', 'http'];
 
 export async function test(run) {
   const { stdout, stderr } = await run();
