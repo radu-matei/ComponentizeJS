@@ -57,7 +57,7 @@ pub fn stub_wasi(wasm: Vec<u8>, features: Vec<Features>) -> Result<Vec<u8>> {
 
     stub_preview1(&mut module)?;
     stub_filesystem(&mut module)?;
-    stub_cli(&mut module)?;
+    // stub_cli(&mut module)?;
 
     if !features.contains(&Features::Random) {
         stub_random(&mut module)?;

@@ -24,7 +24,7 @@ const isWindows = platform === 'win32';
 const DEBUG_BINDINGS = false;
 const DEBUG_CALLS = false;
 
-function maybeWindowsPath (path) {
+function maybeWindowsPath(path) {
   if (!path) return path;
   if (!isWindows) return resolve(path);
   return '//?/' + resolve(path).replace(/\\/g, '/');
@@ -248,7 +248,7 @@ export async function componentize(jsSource, witWorld, opts) {
       //   log: eep("log"),
       // },
       wasi_snapshot_preview1: {
-        fd_write: function (fd, iovs, iovs_len, nwritten) {
+        fd_write: function(fd, iovs, iovs_len, nwritten) {
           if (fd !== 2) return 0;
           const mem = new DataView(exports.memory.buffer);
           let written = 0;
