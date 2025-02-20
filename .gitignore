@@ -2,7 +2,7 @@
 /test/output/
 node_modules/
 target/
-/lib/
+# /lib/
 /crates/wasmtime-test
 /test.js
 /shared
